@@ -29,7 +29,10 @@ tar -xzf content-processor-v1.1.tar.gz -C ~/.agents/skills/
 ls -la ~/.agents/skills/content-processor/
 # 应输出：
 # SKILL.md
+# INSTALL.md
+# QUICK-INSTALL.md
 # scripts/
+#   ├── article_extractor.py
 #   ├── delete_feishu_doc.py
 #   ├── save_to_feishu.py
 #   ├── toutiao_audio_extractor.py
@@ -75,7 +78,7 @@ touch ~/.agents/skills/content-processor/scripts/__init__.py
 
 ```bash
 # 安装必要的 Python 包
-pip install playwright faster-whisper requests
+pip install playwright faster-whisper requests beautifulsoup4 lxml
 
 # 安装 Playwright 浏览器
 playwright install chromium
@@ -164,12 +167,15 @@ python3 ~/.agents/skills/content-processor/scripts/save_to_feishu.py \
 | 文件 | 大小 | 用途 |
 |------|------|------|
 | `SKILL.md` | ~8KB | 技能定义和使用说明 |
+| `INSTALL.md` | ~5KB | 详细安装指南 |
+| `QUICK-INSTALL.md` | ~5KB | 快速安装指南 |
+| `scripts/article_extractor.py` | ~9KB | 文章链接抓取和正文提取 |
 | `scripts/delete_feishu_doc.py` | ~2KB | 删除飞书文档（备用） |
 | `scripts/save_to_feishu.py` | ~5KB | 保存内容到飞书 Wiki |
 | `scripts/toutiao_audio_extractor.py` | ~8KB | 今日头条视频音频提取和转录 |
 | `scripts/transcript_post_processor.py` | ~3KB | 转录文本后处理 |
 
-**总计：** ~26KB，纯文本文件
+**总计：** ~40KB，纯文本文件
 
 ---
 
