@@ -66,10 +66,25 @@ python3 skills/content-processor/scripts/toutiao_audio_extractor.py "<链接>" "
 #### 2️⃣ 文章链接 → 正文抓取
 
 ```
-网页链接 → browser抓取 → 提取正文/标题/作者 → 生成Markdown → 飞书
+网页链接 → Playwright抓取 → 提取正文/标题/作者 → 生成Markdown → 飞书
 ```
 
-**执行方式**：使用 `browser` 工具抓取页面内容，提取结构化信息
+**执行脚本**：
+```bash
+python3 skills/content-processor/scripts/article_extractor.py "<文章链接>" -o output.md -f
+```
+
+**参数说明**：
+- `-o, --output`: 指定输出文件路径
+- `-f, --feishu`: 同时保存到飞书知识库
+
+**支持平台**：
+- 知乎 (zhihu.com)
+- 公众号 (mp.weixin.qq.com)
+- 简书 (jianshu.com)
+- CSDN (csdn.net)
+- 掘金 (juejin.cn)
+- 通用网页（自动识别正文区域）
 
 #### 3️⃣ 图片 → OCR识别
 
@@ -162,6 +177,34 @@ tesseract <图片路径> stdout -l chi_sim+eng
 - Playwright
 - ffmpeg
 - faster-whisper
+
+---
+
+### article_extractor.py
+
+**功能**：文章链接抓取与正文提取
+
+**流程**：
+1. Playwright 访问网页并等待加载
+2. BeautifulSoup 解析 HTML
+3. 根据平台规则提取标题、作者、正文
+4. 生成结构化 Markdown
+
+**依赖**：
+- Playwright
+- beautifulsoup4
+
+**使用示例**：
+```bash
+# 基础使用
+python3 article_extractor.py "https://zhuanlan.zhihu.com/p/xxxxx"
+
+# 保存到文件
+python3 article_extractor.py "https://mp.weixin.qq.com/s/xxxxx" -o article.md
+
+# 保存到文件并上传飞书
+python3 article_extractor.py "https://juejin.cn/post/xxxxx" -o article.md -f
+```
 
 ---
 
